@@ -7,6 +7,7 @@ use Validator;
 use App\Models\Tweet;
 use Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class TweetController extends Controller
 {
@@ -122,4 +123,26 @@ class TweetController extends Controller
             ->get();
         return view('tweet.index', compact('tweets'));
     }
+    public function favorite()
+    {
+        // 現在のログインユーザのIDを取得
+        $userId = Auth::id();
+
+        // ユーザーがお気に入りに追加したツイートのIDを取得
+        $favoriteTweetIds = DB::table('tweet_user')
+            ->where('user_id', $userId)
+            ->pluck('tweet_id')
+            ->all();
+
+        // それらのツイートを取得
+        $tweets = Tweet::query()
+            ->whereIn('id', $favoriteTweetIds)
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        // ツイートをビューに渡して表示
+        return view('tweet.favorite', compact('tweets'));
+    }
+
+
 }

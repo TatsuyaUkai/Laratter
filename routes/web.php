@@ -19,9 +19,10 @@ use App\Http\Controllers\SearchController;
 */
 
 Route::middleware('auth')->group(function () {
+    Route::get('/tweet/favorite', [TweetController::class, 'favorite'])->name('tweet.favorite');
     Route::get('/tweet/search/input', [SearchController::class, 'create'])->name('search.input');
     Route::get('/tweet/search/result', [SearchController::class, 'index'])->name('search.result');
-    Route::get('/tweet/timeline', [TweetController::class, 'timeline'])->name('tweet.timeline');Route::get('user/{user}', [FollowController::class, 'show'])->name('follow.show');
+    Route::get('/tweet/timeline', [TweetController::class, 'timeline'])->name('tweet.timeline');
     Route::get('user/{user}', [FollowController::class, 'show'])->name('follow.show');
     Route::post('user/{user}/follow', [FollowController::class, 'store'])->name('follow');
     Route::post('user/{user}/unfollow', [FollowController::class, 'destroy'])->name('unfollow');
