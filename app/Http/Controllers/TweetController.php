@@ -141,7 +141,7 @@ class TweetController extends Controller
             ->get();
 
         // ツイートをビューに渡して表示
-        return view('tweet.favorite', compact('tweets'));
+        return view('tweet.index', compact('tweets'));
     }
 
 
