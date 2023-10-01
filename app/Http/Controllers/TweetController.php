@@ -51,6 +51,17 @@ class TweetController extends Controller
         $result = Tweet::create($data);
         // ルーティング「todo.index」にリクエスト送信（一覧ページに移動）
          return redirect()->route('tweet.index');
+        
+         // メンションされたユーザーに通知を送る等の処理...
+        preg_match_all('/@(\w+)/', $request->input('tweet'), $mentions);
+        foreach ($mentions[1] as $username) {
+            $user = User::where('name', $username)->first();
+            if ($user) {
+                $user->notify(new Mentioned($result));
+            }
+        }
+
+         return redirect()->route('tweet.index');
     }
 
     /**
@@ -141,7 +152,7 @@ class TweetController extends Controller
             ->get();
 
         // ツイートをビューに渡して表示
-        return view('tweet.favorite', compact('tweets'));
+        return view('tweet.index', compact('tweets'));
     }
 
 
