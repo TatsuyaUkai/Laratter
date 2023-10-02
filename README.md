@@ -17,7 +17,7 @@ Laravel - Google Chrome 2023-10-02 12-05-38.mp4
 
 1．画面上部のナビゲーションの「Index」をクリックすると、他のユーザーを含めたtweetの一覧表示画面に移動する
 
-2．自分が気にいたtweetにfavoriteする（ハートマークを押す）
+2．自分が気にいったtweetにfavoriteする（ハートマークを押す）
 
 3．画面上部のナビゲーションの「Favorite」をクリックすると、favoriteしたtweetの一覧表示画面に移動する
 
