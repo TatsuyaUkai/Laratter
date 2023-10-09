@@ -22,9 +22,9 @@
               <tr class="hover:bg-gray-lighter">
                 <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
                   <div class="flex">
-                    <a href="{{ route('follow.show', $tweet->user->id) }}">
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                       <p class="text-left text-gray-dark dark:text-gray-200">{{$tweet->user->name}}</p>
-                    </a>
+                    </button>
                     <!-- follow 状態で条件分岐 -->
                     @if(Auth::user()->followings()->where('users.id', $tweet->user->id)->exists())
                     <!-- unfollow ボタン -->
@@ -50,6 +50,27 @@
                     </form>
                     @endif
                   </div>
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              Welcome, Websolutionstuff...!!
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-outline-primary">Save changes</button>
+                          </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
                   <a href="{{ route('tweet.show',$tweet->id) }}">
                     <h3 class="text-left font-bold text-lg text-gray-800 dark:text-gray-200">{{$tweet->tweet}}</h3>
                   </a>
